@@ -3,20 +3,14 @@ Make sure to have the Expo Go app installed in your device and run the following
 Connect your device via USB cable on windows PC
 
 
+additional dependencies 
+AsyncStorage for data persistence
+React Navigation for navigation
+Styled Components for styling
 
-app structure
-task-management-app/
-├── src/
-│   ├── components/       # For reusable components
-│   │   └── ExampleComponent.tsx
-│   ├── screens/          # For different screens of the app
-│   │   └── HomeScreen.tsx
-│   ├── styles/           # Centralized styles
-│   │   └── globalStyles.ts
-│   ├── assets/           # Images, fonts, etc.
-│   ├── hooks/            # Custom hooks (if any)
-│   ├── App.tsx           # Main App entry
-├── package.json
-├── tsconfig.json         # TypeScript configuration
-├── .eslintrc.js          # Linting config (optional)
-└── babel.config.js
+React Native Vector Icons for icons
+React Native Elements for UI Kit
+React Native Picker Select for date picker
+React Native Picker for time picker
+React Native Date Picker for date picker
+React Native Swipe Gesture Handler for swipe gesture
