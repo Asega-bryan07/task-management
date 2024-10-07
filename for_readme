@@ -4,9 +4,14 @@ Connect your device via USB cable on windows PC
 
 
 additional dependencies 
-AsyncStorage for data persistence
-React Navigation for navigation
-Styled Components for styling
+AsyncStorage for data persistence(`npm install @react-native-async-storage/async-storage`
+)
+React Navigation for navigation (`npm install @react-navigation/native @react-navigation/stack`
+)
+Styled Components for styling (`npm install styled-components @types/styled-components --legacy-peer-deps`
+) <br>
+used  `--legacy-peer-deps` to bypass the warnings in npm install
+
 
 React Native Vector Icons for icons
 React Native Elements for UI Kit
@@ -14,3 +19,18 @@ React Native Picker Select for date picker
 React Native Picker for time picker
 React Native Date Picker for date picker
 React Native Swipe Gesture Handler for swipe gesture
+
+
+app structure
+Screens:
+TasksList: Displays all tasks
+AddTask: Form to add new task
+EditTask: Form to edit the details of an existing task
+
+Components:
+TaskItem: Displays individual tasks.
+TaskForm: A reusable form component for creating/editing tasks.
+
+State Management:
+Use useState and useEffect hooks for managing task data.
+Use AsyncStorage for persisting tasks.
