@@ -15,6 +15,7 @@ interface Task {
 
 export default function TaskListScreen() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [quote, setQuote] = useState<{ q: string; a: string } | null>(null);
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -27,7 +28,19 @@ export default function TaskListScreen() {
         setTasks(parsedTasks);
       }
     };
+
+    const fetchQuote = async () => {
+      try {
+        const response = await fetch('https://zenquotes.io/api/random');
+        const data = await response.json();
+        setQuote(data[0]);
+      } catch (error) {
+        console.error('Error fetching quote:', error);
+      }
+    };
+
     fetchTasks();
+    fetchQuote();
   }, []);
 
   const handleDelete = async (id: string) => {
@@ -53,6 +66,15 @@ export default function TaskListScreen() {
 
   return (
     <View style={globalStyles.container}>
+      {/* Quote Display */}
+      {quote && (
+        <View style={globalStyles.quoteContainer}>
+          <Text style={globalStyles.quoteText}>
+            "{quote.q}" - {quote.a}
+          </Text>
+        </View>
+      )}
+
       <FlatList
         data={tasks}
         keyExtractor={(item) => item.id}
