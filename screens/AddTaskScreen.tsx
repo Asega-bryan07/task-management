@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';  
-import { Platform } from 'react-native'; 
-import { View, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
+import { Platform, View, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import 'react-native-get-random-values';
 import { v4 as uuid } from 'uuid'; // generate unique task ID
-
 import { globalStyles } from '../styles/styles';
 
 export default function AddTaskScreen() {
@@ -23,11 +21,12 @@ export default function AddTaskScreen() {
     }
 
     if (!dueDate) {
-      Alert.alert('Error', 'DueDate should be a valud furture date!');
+      Alert.alert('Error', 'Due Date should be a valid future date!');
       return;
     }
 
-    const task = { id: uuid(), name, dueDate: dueDate?.toLocaleDateString() || '', status };
+    // Store the due date in ISO format
+    const task = { id: uuid(), name, dueDate: dueDate.toISOString(), status };
     const storedTasks = await AsyncStorage.getItem('tasks');
     const tasks = storedTasks ? JSON.parse(storedTasks) : [];
     tasks.push(task);
@@ -68,7 +67,6 @@ export default function AddTaskScreen() {
           onChange={handleDateChange}  
         />
       )}
-
 
       <Button title="Add New Task" onPress={handleAddNewTask} />
     </View>
