@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { globalStyles } from './styles/styles';
 import MyTasksScreen from './screens/MyTasksScreen';
 import EditTaskScreen from './screens/EditTaskScreen';
 import AddNewTaskScreen from './screens/AddNewTaskScreen';
+
 
 const Stack = createStackNavigator();
 
