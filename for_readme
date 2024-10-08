@@ -1,6 +1,4 @@
-Make sure to have the Expo Go app installed in your device and run the following command:
-`npx expo start -c`
-Connect your device via USB cable on windows PC
+
 
 
 additional dependencies 
@@ -24,7 +22,7 @@ React Native Swipe Gesture Handler for swipe gesture
 app structure
 Screens:
 TasksList: Displays all tasks
-AddTask: Form to add new task
+AddTask: to add new task
 EditTask: Form to edit the details of an existing task
 
 Components:

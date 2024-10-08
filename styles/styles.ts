@@ -18,6 +18,13 @@ export const globalStyles = StyleSheet.create({
         elevation: 2,
     },
 
+    statusIndicator: {
+        width: 10,
+        height: 10,
+        borderRadius: 5,
+        marginRight: 10,
+      },
+
     input: {
         marginBottom: 16,
         padding: 8,

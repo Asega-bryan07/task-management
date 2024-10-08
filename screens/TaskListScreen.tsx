@@ -100,7 +100,7 @@ export default function TaskListScreen() {
       )}
 
       {/* Search Bar with Icon */}
-      <View style={globalStyles.searchBarContainer}>
+      <View style={globalStyles.searchBar}>
         <Icon name="search" size={20} style={globalStyles.searchIcon} display="none" />
         <TextInput
           style={globalStyles.searchBar}

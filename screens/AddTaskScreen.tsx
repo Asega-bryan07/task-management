@@ -13,12 +13,17 @@ export default function AddTaskScreen() {
   const [name, setName] = useState('');
   const [dueDate, setDueDate] = useState<Date | undefined>(undefined);  
   const [showDatePicker, setShowDatePicker] = useState(false); 
-  const [status, setStatus] = useState('To Do'); // Default status
+  const [status] = useState('To Do'); // Default status
   const navigation = useNavigation();
 
   const handleAddNewTask = async () => {
     if (!name) {
       Alert.alert('Error', 'Task name cannot be empty!');
+      return;
+    }
+
+    if (!dueDate) {
+      Alert.alert('Error', 'DueDate should be a valud furture date!');
       return;
     }
 
