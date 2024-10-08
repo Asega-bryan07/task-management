@@ -4,7 +4,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, RouteProp } from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker'; 
 import { Platform } from 'react-native'; 
-
 import { StackParamList } from '../types';  
 import { globalStyles } from '../styles/styles';
 
@@ -14,18 +13,24 @@ interface EditTaskScreenProps {
   route: EditTaskScreenRouteProp;
 }
 
-
 export default function EditTaskScreen({ route }: EditTaskScreenProps) {
   const { task } = route.params;
   const [name, setName] = useState(task.name);
-  const [dueDate, setDueDate] = useState<Date | undefined>(new Date(task.dueDate)); 
+  const [dueDate, setDueDate] = useState<Date>(new Date(task.dueDate)); // Set the initial state
   const [status, setStatus] = useState(task.status);
   const [showDatePicker, setShowDatePicker] = useState(false);  
   const navigation = useNavigation();
 
   useEffect(() => {
     setName(task.name);
-    setDueDate(new Date(task.dueDate));  
+    
+    const parsedDate = new Date(task.dueDate);
+    if (!isNaN(parsedDate.getTime())) { 
+      setDueDate(parsedDate);  
+    } else {
+      setDueDate(new Date()); 
+    }
+
     setStatus(task.status);
   }, [task]);
 
@@ -35,7 +40,7 @@ export default function EditTaskScreen({ route }: EditTaskScreenProps) {
       return;
     }
 
-    const updatedTask = { ...task, name, dueDate: dueDate?.toISOString(), status };
+    const updatedTask = { ...task, name, dueDate: dueDate.toISOString(), status };
     const storedTasks = await AsyncStorage.getItem('tasks');
     const tasks = storedTasks ? JSON.parse(storedTasks) : [];
 
@@ -64,7 +69,7 @@ export default function EditTaskScreen({ route }: EditTaskScreenProps) {
       <TouchableOpacity onPress={() => setShowDatePicker(true)}>
         <TextInput
           placeholder="Select Due Date"
-          value={dueDate ? dueDate.toLocaleDateString() : ''}
+          value={dueDate ? dueDate.toLocaleDateString() : ''} 
           editable={false}  
           style={globalStyles.input}
         />
@@ -72,7 +77,7 @@ export default function EditTaskScreen({ route }: EditTaskScreenProps) {
 
       {showDatePicker && (
         <DateTimePicker
-          value={dueDate || new Date()}  
+          value={dueDate}  
           mode="date"
           display="default"
           onChange={handleDateChange}  

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, FlatList, Button, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TaskItem from '../components/TaskItem';
 import { globalStyles } from '../styles/styles';
@@ -18,16 +18,20 @@ export default function TaskListScreen() {
   const [quote, setQuote] = useState<{ q: string; a: string } | null>(null);
   const navigation = useNavigation();
 
+  // fetch tasks from AsyncStorage
+  const fetchTasks = async () => {
+    const storedTasks = await AsyncStorage.getItem('tasks');
+    if (storedTasks) {
+      const parsedTasks: Task[] = JSON.parse(storedTasks);
+      parsedTasks.sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
+      setTasks(parsedTasks);
+    } else {
+      console.log('No tasks found!');
+    }
+  };
+
   useEffect(() => {
-    const fetchTasks = async () => {
-      const storedTasks = await AsyncStorage.getItem('tasks');
-      if (storedTasks) {
-        const parsedTasks: Task[] = JSON.parse(storedTasks);
-        
-        parsedTasks.sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
-        setTasks(parsedTasks);
-      }
-    };
+    fetchTasks();
 
     const fetchQuote = async () => {
       try {
@@ -39,9 +43,15 @@ export default function TaskListScreen() {
       }
     };
 
-    fetchTasks();
     fetchQuote();
   }, []);
+
+  // Listen for screen focus to refresh tasks
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchTasks();
+    }, [])
+  );
 
   const handleDelete = async (id: string) => {
     const updatedTasks = tasks.filter((task) => task.id !== id);
@@ -52,12 +62,12 @@ export default function TaskListScreen() {
   const renderTaskItem = ({ item }: { item: Task }) => {
     const parsedDate = parseISO(item.dueDate);
     const formattedDate = isValid(parsedDate) ? format(parsedDate, 'MMMM do, yyyy') : 'Invalid Date';
-  
+
     return (
       <TaskItem
         task={{
           ...item,
-          dueDate: formattedDate, 
+          dueDate: formattedDate,
         }}
         onDelete={handleDelete}
       />

@@ -20,9 +20,9 @@ export default function TaskItem({ task, onDelete }: TaskItemProps) {
 
   return (
     <View style={globalStyles.taskContainer}>
-      <Text>{task.name}</Text>
-      <Text>{task.dueDate}</Text>
-      <Text>{task.status}</Text>
+      <Text>TASK: {task.name}</Text>
+      <Text>DATE: {task.dueDate}</Text>
+      <Text>STATUS: {task.status}</Text>
       <View style={globalStyles.buttonContainer}>
         <TouchableOpacity
           style={[globalStyles.button, globalStyles.editButton]}
