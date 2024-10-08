@@ -1,4 +1,15 @@
-import { Button, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+
+
+const lightMode = {
+    backgroundColor: '#fff',
+    color: '#000',
+  };
+  
+  const darkMode = {
+    backgroundColor: '#000',
+    color: '#fff',
+  };
 
 export const globalStyles = StyleSheet.create({
     container: {
@@ -10,11 +21,11 @@ export const globalStyles = StyleSheet.create({
     taskContainer: {
         padding: 16,
         marginBottom: 16,
-        backgroundColor: 'azure',
         borderRadius: 8,
         shadowColor: '#000',
         shadowOpacity: 0.1,
         shadowRadius: 4,
+        backgroundColor: lightMode.backgroundColor, // Default background color
         elevation: 2,
     },
 
@@ -50,17 +61,7 @@ export const globalStyles = StyleSheet.create({
 
       buttonText: {
         fontWeight: 'bold',
-      },
-
-      darkContainer: {
-        flex: 1,
-        backgroundColor: '#333',
-        padding: 20,
-      },
-      lightContainer: {
-        flex: 1,
-        backgroundColor: '#fff',
-        padding: 20,
+        color: lightMode.backgroundColor,
       },
 
       quoteContainer: {
@@ -88,4 +89,17 @@ export const globalStyles = StyleSheet.create({
         marginBottom: 20,
         borderRadius: 10,
       },
-})
+});
+
+
+//return styles based on the theme
+export const getStyles = (isDarkMode: boolean) => ({
+    taskContainer: {
+      ...globalStyles.taskContainer,
+      backgroundColor: isDarkMode ? darkMode.backgroundColor : lightMode.backgroundColor,
+    },
+    buttonText: {
+      ...globalStyles.buttonText,
+      color: isDarkMode ? darkMode.color : lightMode.color,
+    },
+  });
