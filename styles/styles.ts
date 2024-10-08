@@ -4,8 +4,9 @@ export const globalStyles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 16,
-        backgroundColor: 'azure',
+        backgroundColor: '#BAF6A2',
     },
+    
     taskContainer: {
         padding: 16,
         marginBottom: 16,
@@ -16,6 +17,7 @@ export const globalStyles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 2,
     },
+
     input: {
         marginBottom: 16,
         padding: 8,
@@ -24,18 +26,12 @@ export const globalStyles = StyleSheet.create({
         borderRadius: 4,
     },
 
-    taskContainer: {
-        padding: 10,
-        marginVertical: 5,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 8,
-      },
       buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginTop: 10,
       },
+
       button: {
         flex: 1,
         padding: 10,
@@ -43,14 +39,53 @@ export const globalStyles = StyleSheet.create({
         marginHorizontal: 5,
         alignItems: 'center',
       },
+
       editButton: {
         backgroundColor: 'lightgreen',
       },
+
       deleteButton: {
         backgroundColor: 'orange',
       },
+
       buttonText: {
         fontWeight: 'bold',
       },
 
+      darkContainer: {
+        flex: 1,
+        backgroundColor: '#333',
+        padding: 20,
+      },
+      lightContainer: {
+        flex: 1,
+        backgroundColor: '#fff',
+        padding: 20,
+      },
+
+      quoteContainer: {
+        backgroundColor: 'lightblue',
+        padding: 15,
+        marginBottom: 20,
+        borderRadius: 10,
+        alignItems: 'center',
+      },
+      
+      searchBar: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 10,
+        padding: 10,
+        marginBottom: 20,
+      },
+      quoteText: {
+        fontStyle: 'italic',
+        fontWeight: 'bold',
+        fontSize: 16,
+        textAlign: 'center',
+        backgroundColor: 'lightblue',
+        padding: 15,
+        marginBottom: 20,
+        borderRadius: 10,
+      },
 })
