@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, Button, Text } from 'react-native';
+import { View, FlatList, Button, Text, TextInput } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TaskItem from '../components/TaskItem';
 import { globalStyles } from '../styles/styles';
 import { format, isValid, parseISO } from 'date-fns';
+import Icon from 'react-native-vector-icons/Ionicons'; // Import the icon library
 
 interface Task {
   id: string;
@@ -15,6 +16,8 @@ interface Task {
 
 export default function TaskListScreen() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [quote, setQuote] = useState<{ q: string; a: string } | null>(null);
   const navigation = useNavigation();
 
@@ -25,6 +28,7 @@ export default function TaskListScreen() {
       const parsedTasks: Task[] = JSON.parse(storedTasks);
       parsedTasks.sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
       setTasks(parsedTasks);
+      setFilteredTasks(parsedTasks); // Initialize filtered tasks
     } else {
       console.log('No tasks found!');
     }
@@ -56,6 +60,7 @@ export default function TaskListScreen() {
   const handleDelete = async (id: string) => {
     const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
+    setFilteredTasks(updatedTasks); // Update filtered tasks
     await AsyncStorage.setItem('tasks', JSON.stringify(updatedTasks));
   };
 
@@ -74,6 +79,15 @@ export default function TaskListScreen() {
     );
   };
 
+  // Handle search query change
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    const filtered = tasks.filter(task => 
+      task.name.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredTasks(filtered);
+  };
+
   return (
     <View style={globalStyles.container}>
       {/* Quote Display */}
@@ -85,8 +99,19 @@ export default function TaskListScreen() {
         </View>
       )}
 
+      {/* Search Bar with Icon */}
+      <View style={globalStyles.searchBarContainer}>
+        <Icon name="search" size={20} style={globalStyles.searchIcon} display="none" />
+        <TextInput
+          style={globalStyles.searchBar}
+          placeholder="Search tasks"
+          value={searchQuery}
+          onChangeText={handleSearch}
+        />
+      </View>
+
       <FlatList
-        data={tasks}
+        data={filteredTasks}
         keyExtractor={(item) => item.id}
         renderItem={renderTaskItem}
       />
