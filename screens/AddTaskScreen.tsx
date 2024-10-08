@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Alert, Text, TouchableOpacity } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';  
+import { Platform } from 'react-native'; 
+import { View, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import 'react-native-get-random-values';
 import { v4 as uuid } from 'uuid'; // generate unique task ID
+
 import { globalStyles } from '../styles/styles';
-import DateTimePicker from '@react-native-community/datetimepicker';  // DateTimePicker
-import { Platform } from 'react-native'; 
 
 export default function AddTaskScreen() {
   const [name, setName] = useState('');
   const [dueDate, setDueDate] = useState<Date | undefined>(undefined);  
   const [showDatePicker, setShowDatePicker] = useState(false); 
-  const [status, setStatus] = useState('To Do');
+  const [status, setStatus] = useState('To Do'); // Default status
   const navigation = useNavigation();
 
   const handleAddNewTask = async () => {
@@ -62,6 +63,7 @@ export default function AddTaskScreen() {
           onChange={handleDateChange}  
         />
       )}
+
 
       <Button title="Add New Task" onPress={handleAddNewTask} />
     </View>

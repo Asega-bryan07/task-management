@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Button, Alert, Text, TouchableOpacity } from 'react-native';
+import { View, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, RouteProp } from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker'; 
 import { Platform } from 'react-native'; 
+import { Picker } from '@react-native-picker/picker'; // Import Picker
 import { StackParamList } from '../types';  
 import { globalStyles } from '../styles/styles';
 
@@ -84,12 +85,15 @@ export default function EditTaskScreen({ route }: EditTaskScreenProps) {
         />
       )}
 
-      <TextInput
-        placeholder="Status"
-        value={status}
-        onChangeText={setStatus}
-        style={globalStyles.input}
-      />
+      <Picker
+        selectedValue={status}
+        onValueChange={(itemValue) => setStatus(itemValue)}
+        style={globalStyles.input} 
+      >
+        <Picker.Item label="To Do" value="To Do" />
+        <Picker.Item label="In Progress" value="In Progress" />
+        <Picker.Item label="Completed" value="Completed" />
+      </Picker>
       
       <Button title="Update Task" onPress={handleUpdateTask} />
     </View>
