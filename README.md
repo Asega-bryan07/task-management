@@ -18,7 +18,11 @@ edit, and delete tasks. The app should be functional on both Android and iOS usi
 ## Steps to run the App
 
 git clone <https://github.com/Asega-bryan07/task-management.git>
-cd <task-management>
+<br>
+
+cd `task-management`
+<br>
+
 Run `npm install` or `yarn install`
 
 
