@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
 import { globalStyles } from '../styles/styles';
 
 interface Task {
@@ -24,8 +23,20 @@ export default function TaskItem({ task, onDelete }: TaskItemProps) {
       <Text>{task.name}</Text>
       <Text>{task.dueDate}</Text>
       <Text>{task.status}</Text>
-      <Button title="Edit" onPress={() => navigation.navigate('EditTask', { task })} />
-      <Button title="Delete" onPress={() => onDelete(task.id)} />
+      <View style={globalStyles.buttonContainer}>
+        <TouchableOpacity
+          style={[globalStyles.button, globalStyles.editButton]}
+          onPress={() => navigation.navigate('EditTask', { task })}
+        >
+          <Text style={globalStyles.buttonText}>Edit</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[globalStyles.button, globalStyles.deleteButton]}
+          onPress={() => onDelete(task.id)}
+        >
+          <Text style={globalStyles.buttonText}>Delete</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Button, StyleSheet } from "react-native";
 
 export const globalStyles = StyleSheet.create({
     container: {
@@ -23,5 +23,34 @@ export const globalStyles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 4,
     },
+
+    taskContainer: {
+        padding: 10,
+        marginVertical: 5,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 8,
+      },
+      buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 10,
+      },
+      button: {
+        flex: 1,
+        padding: 10,
+        borderRadius: 5,
+        marginHorizontal: 5,
+        alignItems: 'center',
+      },
+      editButton: {
+        backgroundColor: 'lightgreen',
+      },
+      deleteButton: {
+        backgroundColor: 'orange',
+      },
+      buttonText: {
+        fontWeight: 'bold',
+      },
 
 })

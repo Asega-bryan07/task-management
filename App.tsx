@@ -3,20 +3,22 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { globalStyles } from './styles/styles';
-import MyTasksScreen from './screens/MyTasksScreen';
+import AddTaskScreen from './screens/AddTaskScreen';
+import TaskListScreen from './screens/TaskListScreen';
 import EditTaskScreen from './screens/EditTaskScreen';
-import AddNewTaskScreen from './screens/AddNewTaskScreen';
+import { StackParamList } from './types';
 
 
-const Stack = createStackNavigator();
+
+const Stack = createStackNavigator<StackParamList>();
 
 export default function App(){
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         {/* screens  */}
-        <Stack.Screen name="MyTasks" component={MyTasksScreen} options={{ title: 'My Tasks' }} /> 
-        <Stack.Screen name="AddNewTask" component={AddNewTaskScreen} options={{ title: 'Create New Tasks' }} />
+        <Stack.Screen name="TaskList" component={TaskListScreen} options={{ title: 'My Tasks' }} /> 
+        <Stack.Screen name="AddTask" component={AddTaskScreen} options={{ title: 'Create New Tasks' }} />
         <Stack.Screen name="EditTask" component={EditTaskScreen} options={{ title: 'Edit Tasks' }} />
 
       </Stack.Navigator>
