@@ -7,13 +7,13 @@ edit, and delete tasks. The app should be functional on both Android and iOS usi
 <br>
 
 ### Home Screen
-![Home Screen](assets/screenshots/1.png)
+![Home Screen](assets/screenshots/.tasklist.jpg)
 
-### Task List Screen
-![Task List Screen](assets/screenshots/2.png)
+### Edit Task 
+![Edit Task](assets/screenshots/edit.jpg)
 
-### Create Task Screen
-![Create Task Screen](assets/screenshots/3.png)
+### Search Task Screen
+![Search Task Screen](assets/screenshots/search.jpg)
 
 ## Prerequisites
 
