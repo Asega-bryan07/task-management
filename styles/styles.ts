@@ -31,7 +31,7 @@ export const globalStyles = StyleSheet.create({
         borderColor: '#ccc',
         borderWidth: 1,
         borderRadius: 4,
-        fontFamily: 'PlayfairDisplay-Regular', 
+         
     },
 
     buttonContainer: {
@@ -57,8 +57,7 @@ export const globalStyles = StyleSheet.create({
     },
 
     buttonText: {
-        fontWeight: 'bold',
-        fontFamily: 'PlayfairDisplay-Regular', 
+        fontWeight: 'bold', 
     },
 
     quoteContainer: {
@@ -91,17 +90,14 @@ export const globalStyles = StyleSheet.create({
         padding: 15,
         marginBottom: 20,
         borderRadius: 10,
-        fontFamily: 'PlayfairDisplay-Regular',
     },
 
     title: {
-        fontFamily: 'PlayfairDisplay-Regular',
         fontSize: 24, 
         marginBottom: 10, 
     },
 
-    text: {
-        fontFamily: 'PlayfairDisplay-Regular', 
+    text: { 
         fontSize: 16, 
     },
 
